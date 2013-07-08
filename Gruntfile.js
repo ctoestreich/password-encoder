@@ -46,7 +46,8 @@ module.exports = function (grunt) {
                                      '<%= yeoman.app %>/{,*/}*.html',
                                      '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
                                      '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-                                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                                     '<%= yeoman.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                                  ]
                              }
                          },
@@ -153,6 +154,7 @@ module.exports = function (grunt) {
                                          '<%= yeoman.dist %>/scripts/{,*/}*.js',
                                          '<%= yeoman.dist %>/styles/{,*/}*.css',
                                          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                                         '<%= yeoman.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
                                          '<%= yeoman.dist %>/styles/fonts/*'
                                      ]
                                  }
@@ -179,6 +181,12 @@ module.exports = function (grunt) {
                                          cwd: '<%= yeoman.app %>/images',
                                          src: '{,*/}*.{png,jpg,jpeg}',
                                          dest: '<%= yeoman.dist %>/images'
+                                     },
+                                     {
+                                         expand: true,
+                                         cwd: '<%= yeoman.app %>/img',
+                                         src: '{,*/}*.{png,jpg,jpeg}',
+                                         dest: '<%= yeoman.dist %>/img'
                                      }
                                  ]
                              }
@@ -233,6 +241,7 @@ module.exports = function (grunt) {
                                              '.htaccess',
                                              'bower_components/**/*',
                                              'images/{,*/}*.{gif,webp,svg}',
+                                             'img/{,*/}*.{gif,webp,svg}',
                                              'styles/fonts/*'
                                          ]
                                      },
@@ -240,6 +249,14 @@ module.exports = function (grunt) {
                                          expand: true,
                                          cwd: '.tmp/images',
                                          dest: '<%= yeoman.dist %>/images',
+                                         src: [
+                                             'generated/*'
+                                         ]
+                                     },
+                                     {
+                                         expand: true,
+                                         cwd: '.tmp/img',
+                                         dest: '<%= yeoman.dist %>/img',
                                          src: [
                                              'generated/*'
                                          ]
