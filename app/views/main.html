@@ -1,0 +1,13 @@
+<div class="row-fluid" ng-controller="PasswordCtrl">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Password Generator</h2>
+        <fieldset>
+            <password encode="encodePassword(message)"></password>
+            <label class="control-label" for="passwordlength">Password <u>L</u>ength</label>
+            <input ng-change="encodePassword(message)" ng-model="length" type="text" id="passwordlength" accesskey="l" class="span12" value="12"/>
+            <button type="button" class="btn btn-large btn-primary full-width btn-signin" accesskey="p" ng-click="encodePassword(message, true)"><i class="icon-lock"></i> Generate <u>P</u>assword</button>
+            <label class="control-label" for="cryptoText">Generated Password</label>
+            <input class="span12" ng-click="selectText()" type="text" value="{{ crypto }}" id="cryptoText" readonly="readonly" style="background-color: #f0f0f0"/>
+        </fieldset>
+    </form>
+</div>
