@@ -293,7 +293,7 @@ module.exports = function (grunt) {
                              }
                          },
                          build_gh_pages: {
-                             options: {
+                             gh_pages: {
                                  pull: false
                              }
                          }
