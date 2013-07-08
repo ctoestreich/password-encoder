@@ -331,8 +331,14 @@ module.exports = function (grunt) {
         'cssmin',
         'uglify',
         'rev',
-        'usemin'
+        'usemin',
+        'bumpBuild'
     ]);
+
+    grunt.registerTask("bumpBuild", function () {
+        var build = ".build";
+        grunt.file.write(build, parseInt(grunt.file.read(build), 10) + .01);
+    });
 
     grunt.registerTask('publish', [
         'build',
