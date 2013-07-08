@@ -291,11 +291,6 @@ module.exports = function (grunt) {
                                      ]
                                  }
                              }
-                         },
-                         build_gh_pages: {
-                             gh_pages: {
-                                 pull: false
-                             }
                          }
                      });
 
@@ -341,8 +336,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('publish', [
-        'build',
-        'build_gh_pages:gh_pages']);
+        'build']);
 
     grunt.registerTask('default', [
         'jshint',
