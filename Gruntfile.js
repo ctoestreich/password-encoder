@@ -113,7 +113,6 @@ module.exports = function (grunt) {
                                  jshintrc: '.jshintrc'
                              },
                              all: [
-                                 'Gruntfile.js',
                                  '<%= yeoman.app %>/scripts/{,*/}*.js',
                                  '!<%= yeoman.app %>/scripts/libs/*.js'
                              ]
@@ -218,10 +217,16 @@ module.exports = function (grunt) {
                                       removeOptionalTags: true*/
                                  },
                                  files: [
+//                                     {
+//                                         expand: true,
+//                                         cwd: '<%= yeoman.app %>',
+//                                         src: ['*.html', 'views/*.html'],
+//                                         dest: '<%= yeoman.dist %>'
+//                                     },
                                      {
                                          expand: true,
                                          cwd: '<%= yeoman.app %>',
-                                         src: ['*.html', 'views/*.html'],
+                                         src: ['*.html', 'views/**/*.html'],
                                          dest: '<%= yeoman.dist %>'
                                      }
                                  ]
@@ -303,8 +308,8 @@ module.exports = function (grunt) {
                          uglify: {
                              dist: {
                                  files: {
-                                     '<%= yeoman.dist %>/scripts/scripts.js': [
-                                         '<%= yeoman.dist %>/scripts/scripts.js'
+                                     '<%= yeoman.dist %>/scripts/site.scripts.js': [
+                                         '<%= yeoman.dist %>/scripts/site.scripts.js'
                                      ]
                                  }
                              }

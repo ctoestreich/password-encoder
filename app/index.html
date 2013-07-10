@@ -26,7 +26,10 @@
     <!--[endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="container" ng-controller="PasswordCtrl">
+        <div ui-view="password"></div>
+        <div ui-view="menu"></div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -36,23 +39,28 @@
     s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
 
-    <!-- build:js scripts/angular.js -->
+    <!-- build:js scripts/angular.libs.js -->
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js scripts/libs.js -->
+    <!-- build:js scripts/site.libs.js -->
     <script src="scripts/libs/core-min.js"></script>
+    <script src="scripts/libs/x64-core-min.js"></script>
+    <script src="scripts/libs/x64-core-min.js"></script>
     <script src="scripts/libs/md5-min.js"></script>
+    <script src="scripts/libs/sha1-min.js"></script>
+    <script src="scripts/libs/sha256-min.js"></script>
+    <script src="scripts/libs/sha512-min.js"></script>
     <script src="scripts/libs/enc-base64-min.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- build:js({.tmp,app}) scripts/site.scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/password.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js scripts/plugins.js -->
+    <!-- build:js scripts/site.plugins.js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>
     <script src="bower_components/bootstrap-sass/js/bootstrap-alert.js"></script>
@@ -69,13 +77,13 @@
     <script src="bower_components/bootstrap-sass/js/bootstrap-tab.js"></script>
     <!-- endbuild -->
 
-
-
-    <!-- build:js scripts/modules.js -->
+    <!-- build:js scripts/site.modules.js -->
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="scripts/directives/password.js"></script>
+    <script src="scripts/services/password.js"></script>
+    <script src="scripts/filters/uppercase.js"></script>
     <!-- endbuild -->
 </body>
 </html>

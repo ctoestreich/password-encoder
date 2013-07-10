@@ -1,6 +1,6 @@
 {
     "name": "passwordEncoder",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "dependencies": {
         "grunt-karma": "~0.4.5"
     },

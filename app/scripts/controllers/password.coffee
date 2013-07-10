@@ -3,21 +3,36 @@
   Password Controller
 ###
 angular.module('passwordEncoderApp')
-  .controller 'PasswordCtrl', ['$scope', ($scope) ->
-    $scope.length = 12
-    $scope.crypto = ''
-    $scope.password = ''
+  .controller 'PasswordCtrl', ['$scope', 'Password', ($scope, passwordService) ->
+    $scope.md5 = 'btn-info'
+    $scope.passwordService = passwordService
 
-    $scope.encodePassword = (message, select) ->
-      word = message || $scope.password
-      $scope.password = word
-      hash = CryptoJS.MD5(word)
-      $scope.crypto = $scope.strengthen($scope.truncate(hash.toString(CryptoJS.enc.Base64).replace(/\+/g, '7').replace(/\//g, '2').replace(new RegExp('=', 'g'), '4')))
+    $scope.useHash = (hash) ->
+      $scope.passwordService.encoding = hash
+      $scope.md5 = if hash is 'md5' then 'btn-info' else ''
+      $scope.sha1 = if hash is 'sha1' then 'btn-info' else ''
+      $scope.sha2 = if hash is 'sha2' then 'btn-info' else ''
+      $scope.sha3 = if hash is 'sha3' then 'btn-info' else ''
+      $scope.encodePassword($scope.passwordService.word, true)
+      return
+
+
+    $scope.encodePassword = (word, select) ->
+      word = word or $scope.passwordService.word
+      $scope.passwordService.word = word
+      hash = $scope.getHash($scope.passwordService.encoding, word)
+      $scope.passwordService.crypto = $scope.strengthen($scope.truncate(hash.toString(CryptoJS.enc.Base64).replace(/\+/g, '7').replace(/\//g, '2').replace(new RegExp('=', 'g'), '4')))
       $scope.selectText() if select
-      $scope.crypto
+      $scope.passwordService.crypto
+
+    $scope.getHash = (hash, word) ->
+      return CryptoJS.SHA1(word) if hash is 'sha1'
+      return CryptoJS.SHA256(word) if hash is 'sha2'
+      return CryptoJS.SHA512(word) if hash is 'sha3'
+      return CryptoJS.MD5(word)
 
     $scope.truncate = (text) ->
-       length = parseInt($scope.length, 10)
+       length = parseInt($scope.passwordService.wordLength, 10)
        text = text.substring(0, length) if length > 0 and length < text.length
        text
 

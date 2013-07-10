@@ -2,10 +2,20 @@
 ###
   Password Encoder Application
 ###
-angular.module('passwordEncoderApp', [])
-  .config ($routeProvider) ->
-    $routeProvider
-      .when '/',
-        templateUrl: 'views/main.html'
-      .otherwise
-        redirectTo: '/'
+angular.module('passwordEncoderApp', ['ui.state'])
+  .config ($stateProvider) ->
+    $stateProvider.state('index',
+      url: ''
+      views:
+        password:
+          templateUrl: 'views/password.html'
+        menu:
+          templateUrl: 'views/menu/encrypt.html'
+    )
+
+#    $routeProvider
+#      .when '/',
+#        templateUrl: 'views/md5.html'
+#        controller: 'PasswordCtrl'
+#      .otherwise
+#        redirectTo: '/'

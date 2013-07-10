@@ -5,17 +5,22 @@ basePath = '';
 
 // list of files / patterns to load in the browser
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'app/bower_components/angular/angular.js',
-  'app/bower_components/angular-mocks/angular-mocks.js',
-  'app/scripts/libs/core-min.js',
-  'app/scripts/libs/md5-min.js',
-  'app/scripts/libs/enc-base64-min.js',
-  'app/scripts/*.coffee',
-  'app/scripts/**/*.coffee',
-  'test/mock/**/*.coffee',
-  'test/spec/**/*.coffee'
+    JASMINE,
+    JASMINE_ADAPTER,
+    'app/bower_components/angular/angular.js',
+    'app/bower_components/angular-ui-router/release/angular-ui-router.js',
+    'app/bower_components/angular-mocks/angular-mocks.js',
+    'app/scripts/libs/core-min.js',
+    'app/scripts/libs/x64-core-min.js',
+    'app/scripts/libs/md5-min.js',
+    'app/scripts/libs/sha1-min.js',
+    'app/scripts/libs/sha256-min.js',
+    'app/scripts/libs/sha512-min.js',
+    'app/scripts/libs/enc-base64-min.js',
+    'app/scripts/*.coffee',
+    'app/scripts/**/*.coffee',
+    'test/mock/**/*.coffee',
+    'test/spec/**/*.coffee'
 ];
 
 // list of files to exclude
