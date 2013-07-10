@@ -308,8 +308,8 @@ module.exports = function (grunt) {
                          uglify: {
                              dist: {
                                  files: {
-                                     '<%= yeoman.dist %>/scripts/site.scripts.js': [
-                                         '<%= yeoman.dist %>/scripts/site.scripts.js'
+                                     '<%= yeoman.dist %>/scripts/site.app.js': [
+                                         '<%= yeoman.dist %>/scripts/site.app.js'
                                      ]
                                  }
                              }

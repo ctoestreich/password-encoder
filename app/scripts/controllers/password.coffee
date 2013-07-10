@@ -16,9 +16,9 @@ angular.module('passwordEncoderApp')
       $scope.encodePassword($scope.passwordService.word, true)
       return
 
-
     $scope.encodePassword = (word, select) ->
       word = word or $scope.passwordService.word
+      return '' if word.trim() is ''
       $scope.passwordService.word = word
       hash = $scope.getHash($scope.passwordService.encoding, word)
       $scope.passwordService.crypto = $scope.strengthen($scope.truncate(hash.toString(CryptoJS.enc.Base64).replace(/\+/g, '7').replace(/\//g, '2').replace(new RegExp('=', 'g'), '4')))
