@@ -4,7 +4,7 @@
 ###
 angular.module('passwordEncoderApp')
   .controller 'PasswordCtrl', ['$scope', 'Password', ($scope, passwordService) ->
-    $scope.md5 = 'btn-info'
+    $scope.sjcl = 'btn-info'
     $scope.passwordService = passwordService
 
     $scope.useHash = (hash) ->
@@ -13,26 +13,26 @@ angular.module('passwordEncoderApp')
       $scope.sha1 = if hash is 'sha1' then 'btn-info' else ''
       $scope.sha2 = if hash is 'sha2' then 'btn-info' else ''
       $scope.sha3 = if hash is 'sha3' then 'btn-info' else ''
+      $scope.sjcl = if hash is 'sjcl' then 'btn-info' else ''
       $scope.encodePassword($scope.passwordService.word, true)
-      return
 
     $scope.encodePassword = (word, select) ->
       word = word or $scope.passwordService.word
       return '' if word.trim() is ''
       $scope.passwordService.word = word
-      password = $scope.getEncodedHash(word, $scope.passwordService.wordLength)
-      password = $scope.stripSpecialChars(password)
-      password = $scope.truncate(password, $scope.passwordService.wordLength)
+      return '' if !select and $scope.passwordService.encoding is 'sjcl'
+      $scope.loading = 'password-loading'
+      hash = $scope.getHash(word)
+      password = $scope.truncate($scope.stripSpecialChars(hash), $scope.passwordService.wordLength)
       if ($scope.isStrongEnough(password))
-        console.log select
         $scope.selectText() if select
         $scope.passwordService.crypto = password
+        $scope.loading = ''
         return $scope.passwordService.crypto
-      console.log("calling recursively")
       return $scope.encodePassword(word + "x", select)
 
     $scope.stripSpecialChars = (input) ->
-      input.replace(/\+|\/|=/g, '')
+      input.toString(CryptoJS.enc.Base64).replace(/\+|\/|=/g, '')
 
     $scope.isStrongEnough = (input) ->
       return true if input.length < $scope.passwordService.wordLength
@@ -50,33 +50,22 @@ angular.module('passwordEncoderApp')
     $scope.countMatches = (input, regex) ->
       return (input.match(regex) || []).length
 
-                #      $scope.passwordService.crypto = sjcl.codec.base64.fromBits(hash)
-#      $scope.selectText() if select
-#      $scope.passwordService.crypto
-
-#      $scope.passwordService.word = word
-#      hash = $scope.getHash($scope.passwordService.encoding, word)
-#      $scope.passwordService.crypto = $scope.strengthen($scope.truncate(hash.toString(CryptoJS.enc.Base64).replace(/\+/g, '7').replace(/\//g, '2').replace(new RegExp('=', 'g'), '4')))
-#      $scope.selectText() if select
-#      $scope.passwordService.crypto
-
-#    $scope.stripSpecialChars = (input) ->
-#      input.replace(/\+|\/|=/g, '');
-
-    $scope.getEncodedHash = (input, lengthInBytes) ->
-      salt = sjcl.codec.base64.toBits("xnBhH53E3iwFt4GIG0e5Og23")
+    $scope.getSJCLHash = (input) ->
+      salt = sjcl.codec.base64.toBits("xnChH53E3iwFt4GIG0e5Og29")
 #      // make sure our key size is large enough to get the desired length
-      keySize = Math.ceil(lengthInBytes/4) * 3 * 8 + 48
+      keySize = Math.ceil($scope.passwordService.wordLength/4) * 3 * 8 + 48
       start = new Date().getTime()
-      hash = sjcl.misc.pbkdf2(input, salt, 1000, keySize)
+      hash = sjcl.misc.pbkdf2(input, salt, $scope.passwordService.strengthener, keySize)
       console.log(new Date().getTime() - start)
       sjcl.codec.base64.fromBits(hash)
 
-    $scope.getHash = (hash, word) ->
+    $scope.getHash = (word) ->
+      hash = $scope.passwordService.encoding || 'sjcl'
       return CryptoJS.SHA1(word) if hash is 'sha1'
       return CryptoJS.SHA256(word) if hash is 'sha2'
-      return CryptoJS.SHA512(word) if hash is 'sha3'
-      return CryptoJS.MD5(word)
+      return CryptoJS.SHA3(word) if hash is 'sha3'
+      return CryptoJS.MD5(word) if hash is 'md5'
+      return $scope.getSJCLHash(word) if hash is 'sjcl'
 
     $scope.truncate = (text) ->
        length = parseInt($scope.passwordService.wordLength, 10)

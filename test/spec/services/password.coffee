@@ -15,5 +15,5 @@ describe 'Service: password', () ->
     expect(password.crypto).toBe ''
     expect(password.wordLength).toBe 12
     expect(password.word).toBe ''
-    expect(password.encoding).toBe 'md5'
+    expect(password.encoding).toBe 'sjcl'
 

@@ -4,7 +4,8 @@
 ###
 angular.module('passwordEncoderApp')
   .service 'Password', () ->
-    encoding: 'md5'
+    encoding: 'sjcl'
     word: ''
     crypto: ''
     wordLength: 12
+    strengthener: 10000

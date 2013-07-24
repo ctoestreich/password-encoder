@@ -16,17 +16,11 @@ describe 'Controller: PasswordCtrl', () ->
       $scope: scope
     }
 
-    ###
-  encoding: 'md5'
-    word: ''
-    crypto: ''
-    wordLength: 12
-###
   it 'should set default properties on the scope', () ->
-    expect(scope.md5).toBe 'btn-info'
+    expect(scope.sjcl).toBe 'btn-info'
     expect(scope.passwordService.wordLength).toBe 12
     expect(scope.passwordService.crypto).toBe ''
-    expect(scope.passwordService.encoding).toBe 'md5'
+    expect(scope.passwordService.encoding).toBe 'sjcl'
     expect(scope.passwordService.word).toBe ''
 
 

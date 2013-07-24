@@ -10,12 +10,13 @@ files = [
     'app/bower_components/angular/angular.js',
     'app/bower_components/angular-ui-router/release/angular-ui-router.js',
     'app/bower_components/angular-mocks/angular-mocks.js',
+    'app/scripts/libs/sjcl.js',
     'app/scripts/libs/core-min.js',
     'app/scripts/libs/x64-core-min.js',
     'app/scripts/libs/md5-min.js',
     'app/scripts/libs/sha1-min.js',
     'app/scripts/libs/sha256-min.js',
-    'app/scripts/libs/sha512-min.js',
+    'app/scripts/libs/sha3-min.js',
     'app/scripts/libs/enc-base64-min.js',
     'app/scripts/*.coffee',
     'app/scripts/**/*.coffee',
@@ -54,7 +55,7 @@ autoWatch = false;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['PhantomJS'];
+browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 10000;
