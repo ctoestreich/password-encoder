@@ -11,6 +11,8 @@ angular.module('passwordEncoderApp', ['ui.state'])
           templateUrl: 'views/password.html'
         menu:
           templateUrl: 'views/menu/encrypt.html'
+        footer:
+          templateUrl: 'views/site/footer.html'
     )
 
 #    $routeProvider

@@ -27,6 +27,7 @@
     <div class="container" ng-controller="PasswordCtrl">
         <div ui-view="password"></div>
         <div ui-view="menu"></div>
+        <div ui-view="footer"></div>
     </div>
 
     <!-- build:js scripts/angular.libs.js -->
@@ -38,6 +39,7 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/site.libs.js -->
+    <script src="scripts/libs/sjcl.js"></script>
     <script src="scripts/libs/core-min.js"></script>
     <script src="scripts/libs/x64-core-min.js"></script>
     <script src="scripts/libs/x64-core-min.js"></script>
