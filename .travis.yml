@@ -7,6 +7,7 @@ before_script:
   - bower install
 #script:
 #  - grunt test --force
+
 env:
   global:
     - secure: "X0ORsfSKcis1VssUzQS+BevRxzhF4I9suXF/HsCQAet5h1yV8RqRII1kr4WFrIFwcokU2ZVInySoq8QTmUptYamt76L79lw2o2dNGCc4W+iB5evXTCxXyk5uekzcnXCObx0BAK8f19PPiNxo2GNBQfZgZCWBX4WIRh6O6Hzn2rg="
