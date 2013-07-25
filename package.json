@@ -1,6 +1,10 @@
 {
     "name": "passwordEncoder",
     "version": "1.0.1",
+    "repository" : {
+        "type" : "git",
+        "url" : "https://github.com/ctoestreich/password-encoder.git"
+    },
     "dependencies": {
         "grunt-karma": "~0.4.5"
     },
