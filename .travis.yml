@@ -2,11 +2,11 @@ language: node_js
 node_js:
   - 0.8
 before_script:
-  - npm install -g yo grunt-cli bower generator-travis-ci
+  - npm install --quiet -g yo grunt-cli bower generator-travis-ci
   - bower install
 script:
   - grunt karma:continuous
-  - yo travis-ci:gh-pages --disable-insight
+  - yo travis-ci:gh-pages --no-insight --no-update-notifier --disable-insight
 env:
   global:
     - secure: "X0ORsfSKcis1VssUzQS+BevRxzhF4I9suXF/HsCQAet5h1yV8RqRII1kr4WFrIFwcokU2ZVInySoq8QTmUptYamt76L79lw2o2dNGCc4W+iB5evXTCxXyk5uekzcnXCObx0BAK8f19PPiNxo2GNBQfZgZCWBX4WIRh6O6Hzn2rg="
