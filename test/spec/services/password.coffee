@@ -15,5 +15,8 @@ describe 'Service: password', () ->
     expect(password.crypto).toBe ''
     expect(password.wordLength).toBe 12
     expect(password.word).toBe ''
+    expect(password.strengthener).toBe 10000
     expect(password.encoding).toBe 'sjcl'
+    expect(password.useSpecial).toBe false
+    expect(password.maskInput).toBe true
 

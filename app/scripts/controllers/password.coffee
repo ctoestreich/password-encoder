@@ -17,13 +17,14 @@ angular.module('passwordEncoderApp')
       $scope.encodePassword($scope.passwordService.word, true)
 
     $scope.encodePassword = (word, select) ->
-      word = word or $scope.passwordService.word
-      return '' if word.trim() is ''
-      $scope.passwordService.word = word
+      if !word or word.trim() is ''
+        $scope.passwordService.crypto = ''
+        return ''
+#      $scope.passwordService.word = word
       return '' if !select and $scope.passwordService.encoding is 'sjcl'
       $scope.loading = 'password-loading'
       hash = $scope.getHash(word)
-      password = $scope.truncate($scope.stripSpecialChars(hash), $scope.passwordService.wordLength)
+      password = $scope.strengthen($scope.truncate($scope.stripSpecialChars(hash), $scope.passwordService.wordLength))
       if ($scope.isStrongEnough(password))
         $scope.selectText() if select
         $scope.passwordService.crypto = password
@@ -45,7 +46,8 @@ angular.module('passwordEncoderApp')
       return input
 
     $scope.containsMinCharTypeMix = (input, count) ->
-      return $scope.countMatches(input, /[0-9]/g) >= count && $scope.countMatches(input, /[a-z]/g) >= count && $scope.countMatches(input, /[A-Z]/g) >= count
+      useSpecial = if $scope.passwordService.useSpecial then $scope.countMatches(input, /[\!\@\#\$\^\&\(\)\~]/g) >= count else true
+      return useSpecial and $scope.countMatches(input, /[0-9]/g) >= count and $scope.countMatches(input, /[a-z]/g) >= count and $scope.countMatches(input, /[A-Z]/g) >= count
 
     $scope.countMatches = (input, regex) ->
       return (input.match(regex) || []).length
@@ -56,7 +58,6 @@ angular.module('passwordEncoderApp')
       keySize = Math.ceil($scope.passwordService.wordLength/4) * 3 * 8 + 48
       start = new Date().getTime()
       hash = sjcl.misc.pbkdf2(input, salt, $scope.passwordService.strengthener, keySize)
-      console.log(new Date().getTime() - start)
       sjcl.codec.base64.fromBits(hash)
 
     $scope.getHash = (word) ->
@@ -73,11 +74,17 @@ angular.module('passwordEncoderApp')
        text
 
     $scope.strengthen = (text) ->
-       if text.length >= 6
-         text = '9' + text.substring(0, text.length - 2) + '3'  unless text.match(/[0-9].*[0-9]/g)
-         text = 'N' + text.substring(0, text.length - 2) + 'W'  unless text.match(/[A-Z].*[A-Z]/g)
-         text = 'q' + text.substring(0, text.length - 2) + 'b'  unless text.match(/[a-z].*[a-z]/g)
-       text
+      if $scope.passwordService.useSpecial
+        text = '^' + text.substring(0, text.length - 2) + '!' if text.match(/^[0-9].*[0-9]$/g)
+        text = '#' + text.substring(0, text.length - 2) + '~' if text.match(/^[0-9].*[A-Z]$/g)
+        text = '@' + text.substring(0, text.length - 2) + '^' if text.match(/^[0-9].*[a-z]$/g)
+        text = '^' + text.substring(0, text.length - 2) + '$' if text.match(/^[A-Z].*[0-9]$/g)
+        text = '!' + text.substring(0, text.length - 2) + '^' if text.match(/^[A-Z].*[A-Z]$/g)
+        text = '$' + text.substring(0, text.length - 2) + '#' if text.match(/^[A-Z].*[a-z]$/g)
+        text = '@' + text.substring(0, text.length - 2) + '$' if text.match(/^[a-z].*[0-9]$/g)
+        text = '#' + text.substring(0, text.length - 2) + '^' if text.match(/^[a-z].*[A-Z]$/g)
+        text = '!' + text.substring(0, text.length - 2) + '$' if text.match(/^[a-z].*[a-z]$/g)
+      text
 
     $scope.selectText = () ->
        e = $('#cryptoText')

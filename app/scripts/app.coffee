@@ -2,7 +2,7 @@
 ###
   Password Encoder Application
 ###
-angular.module('passwordEncoderApp', ['ui.state'])
+angular.module('passwordEncoderApp', ['ui.state', 'ui.bootstrap'])
   .config ($stateProvider) ->
     $stateProvider.state('index',
       url: ''
@@ -14,10 +14,3 @@ angular.module('passwordEncoderApp', ['ui.state'])
         footer:
           templateUrl: 'views/site/footer.html'
     )
-
-#    $routeProvider
-#      .when '/',
-#        templateUrl: 'views/md5.html'
-#        controller: 'PasswordCtrl'
-#      .otherwise
-#        redirectTo: '/'

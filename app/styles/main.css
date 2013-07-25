@@ -22,7 +22,7 @@ body {
     text-align: center;
 }
 
-.site-box input[type="text"] {
+.site-box input[type="text"], .site-box input[type="password"] {
     font-size: 16px;
     height: auto;
     margin-bottom: 15px;
@@ -46,4 +46,11 @@ body {
 
 .password-loading {
     background: url('../img/loading.gif') no-repeat right center !important;
+}
+
+.btn-medium {
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-size: 16px;
+    line-height: normal;
 }
