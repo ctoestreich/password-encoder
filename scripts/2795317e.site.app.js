@@ -1,0 +1,1 @@
+"use strict";angular.module("passwordEncoderApp",["ui.state","ui.bootstrap"]).config(["$stateProvider",function(a){return a.state("index",{url:"",views:{password:{templateUrl:"views/password.html"},menu:{templateUrl:"views/menu/encrypt.html"},footer:{templateUrl:"views/site/footer.html"}}})}]);
