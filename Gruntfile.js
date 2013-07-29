@@ -352,7 +352,7 @@ module.exports = function (grunt) {
         'cdnify',
         'ngmin',
         'cssmin',
-        'uglify',
+//        'uglify',
         'rev',
         'usemin',
         'bumpBuild'
