@@ -348,12 +348,12 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concurrent:dist',
         'concat',
+//        'uglify',
+        //        'ngmin',
         'copy',
         'cdnify',
-//        'ngmin',
         'cssmin',
-//        'uglify',
-        'rev',
+//        'rev',
         'usemin',
         'bumpBuild'
     ]);
