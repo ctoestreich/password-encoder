@@ -250,7 +250,8 @@ module.exports = function (grunt) {
                                              'bower_components/**/*',
                                              'images/{,*/}*.{gif,webp,svg}',
                                              'img/{,*/}*.{gif,webp,svg}',
-                                             'styles/fonts/*'
+                                             'styles/fonts/*',
+                                                 'scripts/**/*.js'
                                          ]
                                      },
                                      {
@@ -348,16 +349,16 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'useminPrepare',
+//        'useminPrepare',
         'concurrent:dist',
-        'concat',
+//        'concat',
 //        'uglify',
         //        'ngmin',
         'copy',
         'cdnify',
-        'cssmin',
+//        'cssmin',
 //        'rev',
-        'usemin',
+//        'usemin',
         'bumpBuild'
     ]);
 
