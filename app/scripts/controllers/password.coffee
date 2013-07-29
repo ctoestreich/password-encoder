@@ -1,7 +1,3 @@
-'use strict'
-###
-  Password Controller
-###
 angular.module('passwordEncoderApp')
   .controller 'PasswordCtrl', ['$scope', 'Password', ($scope, passwordService) ->
     $scope.sjcl = 'btn-info'
