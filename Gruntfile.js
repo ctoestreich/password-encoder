@@ -119,6 +119,9 @@ module.exports = function (grunt) {
                          },
                          coffee: {
                              dist: {
+                                 options: {
+                                     bare: true
+                                 },
                                  files: [
                                      {
                                          expand: true,
