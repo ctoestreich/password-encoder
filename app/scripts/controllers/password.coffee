@@ -29,7 +29,8 @@ angular.module('passwordEncoderApp')
       return $scope.encodePassword(word + "x", select)
 
     $scope.stripSpecialChars = (input) ->
-      input.toString(CryptoJS.enc.Base64).replace(/\+|\/|=/g, '')
+      encodedString = input.toString(CryptoJS.enc.Base64)
+      if $scope.passwordService.useSpecial then return encodedString else return encodedString.replace(/\+|\/|=/g, '')
 
     $scope.isStrongEnough = (input) ->
       return true if input.length < $scope.passwordService.wordLength
@@ -42,7 +43,7 @@ angular.module('passwordEncoderApp')
       return input
 
     $scope.containsMinCharTypeMix = (input, count) ->
-      useSpecial = if $scope.passwordService.useSpecial then $scope.countMatches(input, /[\!\@\#\$\^\&\(\)\~]/g) >= count else true
+      useSpecial = if $scope.passwordService.useSpecial then $scope.countMatches(input, /[\+\/\!\@\#\$\^\&\(\)\~]/g) >= count else true
       return useSpecial and $scope.countMatches(input, /[0-9]/g) >= count and $scope.countMatches(input, /[a-z]/g) >= count and $scope.countMatches(input, /[A-Z]/g) >= count
 
     $scope.countMatches = (input, regex) ->
@@ -52,7 +53,6 @@ angular.module('passwordEncoderApp')
       salt = sjcl.codec.base64.toBits("xnChH53E3iwFt4GIG0e5Og29")
 #      // make sure our key size is large enough to get the desired length
       keySize = Math.ceil($scope.passwordService.wordLength/4) * 3 * 8 + 48
-      start = new Date().getTime()
       hash = sjcl.misc.pbkdf2(input, salt, $scope.passwordService.strengthener, keySize)
       sjcl.codec.base64.fromBits(hash)
 
@@ -70,6 +70,7 @@ angular.module('passwordEncoderApp')
        text
 
     $scope.strengthen = (text) ->
+      return text
       if $scope.passwordService.useSpecial
         text = '^' + text.substring(0, text.length - 2) + '!' if text.match(/^[0-9].*[0-9]$/g)
         text = '#' + text.substring(0, text.length - 2) + '~' if text.match(/^[0-9].*[A-Z]$/g)
