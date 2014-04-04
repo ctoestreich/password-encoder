@@ -9,5 +9,5 @@ angular.module('passwordEncoderApp')
     crypto: ''
     wordLength: 12
     strengthener: 10000
-    useSpecial: false
+    useSpecial: true
     maskInput: true
