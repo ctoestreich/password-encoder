@@ -12,6 +12,7 @@ describe 'Controller: PasswordCtrl', () ->
   beforeEach inject ($controller, $rootScope, _Password_) ->
     scope = $rootScope.$new()
     scope.passwordService = _Password_
+    scope.passwordService.useSpecial = false
     PasswordCtrl = $controller 'PasswordCtrl', {
       $scope: scope
     }
